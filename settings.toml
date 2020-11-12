@@ -1,0 +1,11 @@
+[default]
+SQLALCHEMY_TRACK_MODIFICATIONS=false
+
+[development]
+SQLALCHEMY_DATABASE_URI="postgresql://postgres:fireworks7859@localhost/flask-store-dev"
+
+[production]
+SQLALCHEMY_DATABASE_URI="postgresql://postgres:fireworks7859@localhost/flask-store"
+
+[testing]
+SQLALCHEMY_DATABASE_URI="sqlite://"
