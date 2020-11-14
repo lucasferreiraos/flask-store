@@ -1,4 +1,5 @@
 [default]
+SECRET_KEY="secret"
 SQLALCHEMY_TRACK_MODIFICATIONS=false
 
 [development]

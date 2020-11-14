@@ -19,6 +19,4 @@ def init_app(app):
 
     @app.shell_context_processor
     def context_processor():
-        return dict(
-            app=app, db=db, User=User
-        )
+        return dict(app=app, db=db, User=User)
