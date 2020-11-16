@@ -1,12 +1,12 @@
 [default]
-SECRET_KEY="secret"
+SECRET_KEY="@jinja {{env.SECRET_KEY}}"
 SQLALCHEMY_TRACK_MODIFICATIONS=false
 
 [development]
-SQLALCHEMY_DATABASE_URI="postgresql://postgres:fireworks7859@localhost/flask-store-dev"
+SQLALCHEMY_DATABASE_URI="@jinja {{env.DATABASE_DEV_URI}}"
 
 [production]
-SQLALCHEMY_DATABASE_URI="postgresql://postgres:fireworks7859@localhost/flask-store"
+SQLALCHEMY_DATABASE_URI="@jinja {{env.DATABASE_URI}}"
 
 [testing]
 SQLALCHEMY_DATABASE_URI="sqlite://"

@@ -14,18 +14,18 @@ class Login(Resource):
 
     def get(self):
         if not request.headers.get("Authorization"):
-            return {"error":"authorizatiuon nao encontrado"}, 400
+            return {"error": "authorizatiuon nao encontrado"}, 400
 
         basic, code = request.headers["Authorization"].split(" ")
         if not basic.lower() == "basic":
             return {"error": "autorizacao mal formatada"}, 400
 
         email, password = b64decode(code).decode().split(":")
-        
+
         user = User.query.filter_by(email=email).first()
         if not user or not check_password_hash(user.password, password):
-            return {"error":"email e/ou senha invalidos"}, 400
-        
+            return {"error": "email e/ou senha invalidos"}, 400
+
         token = create_access_token(
             {"id": user.id}, expires_delta=timedelta(minutes=10)
         )
