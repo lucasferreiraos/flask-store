@@ -56,6 +56,10 @@ class Register(Resource):
         db.session.add(user)
         try:
             db.session.commit()
+            send_mail(
+                "Bem vindo(a) a Flask Store", user.email, "welcome", email=user.email
+            )
+
             return {"message": "Usuario registrado com sucesso"}, 201
         except Exception as e:
             db.session.rollback()
@@ -83,6 +87,6 @@ class ForgetPassword(Resource):
             "Recuperação de senha",
             user.email,
             "forget-password",
-            password_temp=password_temp
+            password_temp=password_temp,
         )
         return {"message": "email enviado com sucesso"}

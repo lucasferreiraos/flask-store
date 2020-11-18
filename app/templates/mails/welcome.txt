@@ -1,0 +1,5 @@
+Olá, {{ email }}!
+Obrigado por criar o registro na Flask Store LTDA
+
+Atenciosamente,
+Lucas Ferreira - CEO & CTO
