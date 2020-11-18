@@ -1,7 +1,9 @@
 import logging
+import secrets
 from base64 import b64decode
 
 from app.extensions import db
+from app.services.mail import send_mail
 from app.models import User
 from datetime import timedelta
 from flask import request
@@ -59,3 +61,28 @@ class Register(Resource):
             db.session.rollback()
             logging.critical(str(e))
             return {"error": "nao foi possivel registrar o usuario"}, 500
+
+
+class ForgetPassword(Resource):
+
+    def post(self):
+        parser = reqparse.RequestParser(trim=True)
+        parser.add_argument("email", required=True, help="o campo email e obrigatorio")
+        args = parser.parse_args()
+
+        user = User.query.filter_by(email=args.email).first()
+        if not user:
+            return {"error": "dados nao encontrados"}, 400
+
+        password_temp = secrets.token_hex(8)
+        user.password = generate_password_hash(password_temp)
+        db.session.add(user)
+        db.session.commit()
+
+        send_mail(
+            "Recuperação de senha",
+            user.email,
+            "forget-password",
+            password_temp=password_temp
+        )
+        return {"message": "email enviado com sucesso"}
