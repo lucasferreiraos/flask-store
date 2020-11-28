@@ -10,4 +10,3 @@ class EOrder(Enum):
     PAID = "pago"
     REFUNDED = "reembolsado"
     FAILED = "falha no pagamento"
-    

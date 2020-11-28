@@ -29,7 +29,7 @@ class Login(Resource):
             return {"error": "email e/ou senha invalidos"}, 400
 
         token = create_access_token(
-            {"id": user.id}, expires_delta=timedelta(minutes=10)
+            {"id": user.id}, expires_delta=timedelta(days=2)
         )
 
         return {"access_token": token}
